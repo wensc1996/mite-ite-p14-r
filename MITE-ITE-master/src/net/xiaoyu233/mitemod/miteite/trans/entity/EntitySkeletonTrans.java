@@ -15,6 +15,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Calendar;
 
+import static net.xiaoyu233.mitemod.miteite.util.Configs.GameMechanics.MobSpawning.skeletonRideBat;
+
 @Mixin(EntitySkeleton.class)
 public class EntitySkeletonTrans extends EntityMonster implements IRangedEntity {
    private static final int DATA_OBJ_ID_SKELETON_TYPE = 13;
@@ -368,6 +370,21 @@ public class EntitySkeletonTrans extends EntityMonster implements IRangedEntity 
       }
 
       this.setCombatTask();
+      if(rand.nextInt(5) == 0 && skeletonRideBat.get()) {
+         EntityBat entityBat;
+         // 近战骷髅
+         if(this.getSkeletonType() > 0) {
+            entityBat = new EntityVampireBat(this.worldObj);
+         } else {
+            entityBat = new EntityBat(this.worldObj);
+         }
+         entityBat.setPosition(this.posX, this.posY, this.posZ);
+         this.worldObj.spawnEntityInWorld(entityBat);
+         entityBat.onSpawnWithEgg(null);
+         entityBat.setAttackTarget(this.getTarget());
+         entityBat.entityFX(EnumEntityFX.summoned);
+         this.mountEntity(entityBat);
+      }
       return par1EntityLivingData;
    }
 

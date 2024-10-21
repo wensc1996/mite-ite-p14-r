@@ -5,9 +5,12 @@ import net.xiaoyu233.fml.util.Utils;
 import net.xiaoyu233.mitemod.miteite.item.Items;
 import net.xiaoyu233.mitemod.miteite.util.Configs;
 
+import static net.xiaoyu233.mitemod.miteite.util.Configs.GameMechanics.MobSpawning.isSpawnExchanger;
+
 public class EntityAnnihilationSkeleton extends EntitySkeleton {
     private boolean attackedByPlayer;
     private int despawnCount;
+    private boolean haveTryToSpawnExchanger = false;
     private final ItemStack weapon = Utils.safeMake(()-> {
         ItemStack itemStack = new ItemStack(Items.VIBRANIUM_DAGGER);
         itemStack.addEnchantment(Enchantment.knockback,5);
@@ -89,6 +92,25 @@ public class EntityAnnihilationSkeleton extends EntitySkeleton {
             this.particleCount = 20;
             this.generateRandomParticles(EnumParticle.largesmoke);
             this.generateRandomParticles(EnumParticle.largesmoke);
+        }
+        if(isSpawnExchanger.get()) {
+            if (!this.getWorld().isRemote) {
+                EntityLiving target = this.getAttackTarget();
+                if (target instanceof EntityPlayer) {
+                    if (!haveTryToSpawnExchanger) {
+                        if (rand.nextInt(50) == 0) {
+                            EntityExchanger entityExchanger = new EntityExchanger(this.worldObj);
+                            entityExchanger.setPosition(this.posX, this.posY, this.posZ);
+                            entityExchanger.refreshDespawnCounter(-9600);
+                            this.worldObj.spawnEntityInWorld(entityExchanger);
+                            entityExchanger.onSpawnWithEgg(null);
+                            entityExchanger.setAttackTarget(this.getTarget());
+                            entityExchanger.entityFX(EnumEntityFX.summoned);
+                        }
+                        this.haveTryToSpawnExchanger = true;
+                    }
+                }
+            }
         }
     }
 

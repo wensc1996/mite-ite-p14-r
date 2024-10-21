@@ -54,6 +54,7 @@ enchantment.extend=Extend
 enchantment.emergency=Emergency
 enchantment.beheading=Beheading
 enchantment.conqueror=Conqueror
+enchantment.fixed=Fixed
 
 entity.EntityZombieLord.name=Zombie Lord
 entity.EntityAnnihilationSkeleton.name=Annihilation Skeleton

@@ -2,9 +2,7 @@ package net.xiaoyu233.mitemod.miteite.trans.world;
 
 import net.minecraft.*;
 import net.xiaoyu233.fml.util.ReflectHelper;
-import net.xiaoyu233.mitemod.miteite.entity.EntityAnnihilationSkeleton;
-import net.xiaoyu233.mitemod.miteite.entity.EntityWanderingWitch;
-import net.xiaoyu233.mitemod.miteite.entity.EntityZombieLord;
+import net.xiaoyu233.mitemod.miteite.entity.*;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -118,6 +116,10 @@ public class BiomeBaseTrans {
       this.spawnableMonsterList.add(new BiomeMeta(EntityZombieLord.class, 2, 1, 1));
       this.spawnableMonsterList.add(new BiomeMeta(EntityAnnihilationSkeleton.class, 1, 1, 1));
       this.spawnableMonsterList.add(new BiomeMeta(EntityWanderingWitch.class, 1, 1, 1));
+
+      this.spawnableMonsterList.add(new BiomeMeta(EntityZombieDoor.class, 2, 1, 1));
+      this.spawnableMonsterList.add(new BiomeMeta(EntityExchanger.class, 2,1, 1));
+      this.spawnableMonsterList.add(new BiomeMeta(EntityMirrorSkeleton.class, 5,1, 1));
    }
 
    @Shadow

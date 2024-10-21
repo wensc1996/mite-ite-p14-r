@@ -23,6 +23,9 @@ public class Configs {
                     addEntry(ConfigEntry.of("player_defence_max_time",GameMechanics.PLAYER_DEFENCE_MAX_TIME).withComment("玩家格挡最大时间")).
                     addEntry(ConfigEntry.of("player_disarm_player",GameMechanics.PLAYER_DISARM_PLAYER).withComment("玩家缴械玩家")).
                     addEntry(ConfigCategory.of("MobSpawning").
+
+                            addEntry(ConfigEntry.of("skeleton_ride_bat",GameMechanics.MobSpawning.skeletonRideBat).withComment("是否骷髅有概率骑蝙蝠")).
+                            addEntry(ConfigEntry.of("is_spawn_exchanger",GameMechanics.MobSpawning.isSpawnExchanger).withComment("是否生成转移骷髅")).
                             addEntry(ConfigEntry.of("blood_moon_max_hostile_fraction",GameMechanics.MobSpawning.BLOOD_MOON_MAX_HOSTILE_FRACTION).withComment("血月最大刷怪数量系数(小数)")).
                             addEntry(ConfigEntry.of("ghast_spawn_limit_day",GameMechanics.MobSpawning.GHAST_SPAWN_LIMIT_DAY).withComment("主世界生成恶魂所需天数(整数)")).
                             addEntry(ConfigEntry.of("annihilation_skeleton_spawn_in_light",GameMechanics.MobSpawning.ANNIHILATION_SKELETON_SPAWN_IN_LIGHT).withComment("主世界湮灭骷髅在光照出生成")).
@@ -200,6 +203,9 @@ public class Configs {
         public static final FieldReference<Double> STEPPED_PLAYER_BASE_DAMAGE_MAX = new FieldReference<>(2d);
         public static final FieldReference<Double> STEPPED_PLAYER_DAMAGE_INCREASE_PER_LVL = new FieldReference<>(0.1d);
         public static class MobSpawning{
+
+            public static final FieldReference<Boolean> skeletonRideBat = new FieldReference<>(true);
+            public static final FieldReference<Boolean> isSpawnExchanger = new FieldReference<>(true);
             public static final FieldReference<Integer> ANCIENT_BONE_LORD_SPAWN_LIMIT_DAY = new FieldReference<>(192);
             public static final FieldReference<Double> BLOOD_MOON_MAX_HOSTILE_FRACTION = new FieldReference<>(128d);
             public static final FieldReference<Integer> GHAST_SPAWN_LIMIT_DAY = new FieldReference<>(128);

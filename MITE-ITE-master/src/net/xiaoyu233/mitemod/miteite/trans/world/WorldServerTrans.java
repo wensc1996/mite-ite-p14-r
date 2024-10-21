@@ -3,6 +3,9 @@ package net.xiaoyu233.mitemod.miteite.trans.world;
 import net.minecraft.*;
 import net.minecraft.server.MinecraftServer;
 import net.xiaoyu233.fml.util.ReflectHelper;
+import net.xiaoyu233.mitemod.miteite.entity.EntityExchanger;
+import net.xiaoyu233.mitemod.miteite.entity.EntityMirrorSkeleton;
+import net.xiaoyu233.mitemod.miteite.entity.EntityZombieDoor;
 import net.xiaoyu233.mitemod.miteite.entity.EntityZombieLord;
 import net.xiaoyu233.mitemod.miteite.util.Configs;
 import org.spongepowered.asm.mixin.Final;
@@ -11,6 +14,8 @@ import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
 import java.util.List;
+
+import static net.xiaoyu233.mitemod.miteite.util.Configs.GameMechanics.MobSpawning.isSpawnExchanger;
 
 @Mixin(WorldServer.class)
 public abstract class WorldServerTrans extends World {
@@ -134,6 +139,17 @@ public abstract class WorldServerTrans extends World {
                return entity_class;
             }
          } else {
+
+            if (entity_class == EntityExchanger.class && isSpawnExchanger.get()) {
+               return entity_class;
+            }
+            if (entity_class == EntityMirrorSkeleton.class) {
+               return entity_class;
+            }
+            if (entity_class == EntityZombieDoor.class) {
+               return entity_class;
+            }
+
             if (entity_class == EntityZombieLord.class) {
                return entity_class;
             }
